@@ -3,25 +3,26 @@ import TodoEditorContainer from './../container/TodoEditorContainer';
 
 export default class ToDoEditorPage extends React.Component {
 
-    getMode(){
-        if(this.props.match.path === "/todoEditor/edit/:id"){
+    getMode() {
+        if (this.props.match.path === "/todoEditor/edit/:id") {
             return "edit";
         }
 
-        if(this.props.match.path ==="/todoEditor/new/:parentId?"){
+        if (this.props.match.path === "/todoEditor/new/:parentId?") {
             return "new";
         }
 
         throw new Error("Unknow url!");
     }
 
-    render(){
+    render() {
         console.log(this.props);
-        return(
-          <TodoEditorContainer
-              history={this.props.history}
-              mode={this.getMode()} id={this.props.match.id}
-          parentId={this.props.match.parentID}/>
+        return (
+            <TodoEditorContainer
+                history={this.props.history}
+                mode={this.getMode()}
+                id={this.props.match.params.id}
+                parentId={this.props.match.parentID}/>
         );
     }
 }

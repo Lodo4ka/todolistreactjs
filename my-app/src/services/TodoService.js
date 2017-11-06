@@ -14,4 +14,25 @@ export default class TodoService{
             });
 
     }
+
+    get(id){
+        return fetch(this.startUrl +"todo/" + id, {
+            method: "get",
+            headers: new Headers({
+                "Content-type": "application/json;charset=UTF-8",
+                "token": localStorage.getItem("token")
+            }),
+        });
+    }
+
+    update(todo){
+        return fetch(this.startUrl +"todo", {
+            method: "put",
+            headers: new Headers({
+                "Content-type": "application/json;charset=UTF-8",
+                "token": localStorage.getItem("token")
+            }),
+            body: JSON.stringify(todo)
+        });
+    }
 }

@@ -10,4 +10,4 @@ const todoService = new TodoService(startUrl);
 const dateUtils = new DateUtils();
 
 
-export {userService, dateUtils};
+export {userService, dateUtils, todoService};

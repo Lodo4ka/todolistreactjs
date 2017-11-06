@@ -13,7 +13,7 @@ class App extends Component {
         return (
             <HashRouter>
                 <div>
-                    <Route path="/" component={NavigationBar}/>
+                    <Route path="/" component={NavigationBarContainer}/>
                     <Route exact path="/" component={WelcomeContent}/>
                     <Route exact path="/registration" component={RegistrationContainer}/>
                     <Route exact path="/authentication" component={AuthenticationContainer}/>
