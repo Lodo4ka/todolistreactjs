@@ -1,35 +1,46 @@
 import React from 'react';
 import NavigationBar from '/Users/lodo4ka/Desktop/Github/todolistreactjs/my-app/src/components/NavigationBar.js';
+import {connect} from 'react-redux'
+import {setIsAuthenticated} from "../store/user/UserActions";
 
 export default class NavigationBarContainer extends React.Component {
 
-    constructor(props){
-        super(props);
-        let token = localStorage.getItem("token");
-        this.state = {
-            isAuthenticated: Boolean(token)
-        }
-    }
 
-    isAuthenticated;
-    onClickLogOutOrIn = () =>{
-        if(this.state.isAuthenticated){
+
+    onClickLogOutOrIn = () => {
+        if (this.props.isAuthenticated) {
+            let action = setIsAuthenticated(false);
+            this.props.dispatch(action);
             localStorage.removeItem("token");
-            this.setState({
-                isAuthenticated: false
-            });
+
+            this.props.history.push("/");
         }
         else {
             this.props.history.push("/");
         }
     };
 
-    render(){
-        return(
+    render() {
+        return (
 
             <NavigationBar
-                isAuthenticated={this.state.isAuthenticated}
-            onClickLogOut={this.onClickLogOutOrIn}/>
+                isAuthenticated={this.props.isAuthenticated}
+                onClickLogOut={this.onClickLogOutOrIn}/>
         )
     }
 }
+
+const mapStateToProps = (state) => {
+    let props = {
+        isAuthenticated: state.isAuthenticated
+    }
+    return props;
+};
+
+
+//function
+let reduxContainerCreator = connect(mapStateToProps());
+//React component
+let ReduxNavigationBarContainer = reduxContainerCreator(NavigationBarContainer);
+
+export default ReduxNavigationBarContainer;
